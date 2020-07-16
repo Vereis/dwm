@@ -2,19 +2,19 @@
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 16;       /* snap pixel */
+static const unsigned int snap      = 4;       /* snap pixel */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#111111";
+static const char col_gray1[]       = "#151413";
 static const char col_gray2[]       = "#222222";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_accent[]        = "#000000";
+static const char col_gray3[]       = "#a5a4a3";
+static const char col_gray4[]       = "#e5e4e3";
+static const char col_accent[]      = "#353433";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	/*               fg         bg           border   */
+	[SchemeNorm] = { col_gray3, col_gray1,   col_gray2 },
 	[SchemeSel]  = { col_gray4, col_accent,  col_accent  },
 };
 
@@ -33,15 +33,14 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5;  /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "Tile",      tile },    /* first entry is default */
-	{ "Float",      NULL },    /* no layout function means floating behavior */
-	{ "Mono",      monocle },
+	{ "+",      tile },
+	{ "-",      NULL },
+	{ "*",      monocle },
 };
 
 /* key definitions */
