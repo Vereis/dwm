@@ -3,7 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 4;       /* snap pixel */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
@@ -11,7 +11,7 @@ static const char col_gray1[]       = "#151413";
 static const char col_gray2[]       = "#222222";
 static const char col_gray3[]       = "#a5a4a3";
 static const char col_gray4[]       = "#e5e4e3";
-static const char col_accent[]      = "#353433";
+static const char col_accent[]      = "#252423";
 static const char *colors[][3]      = {
 	/*               fg         bg           border   */
 	[SchemeNorm] = { col_gray3, col_gray1,   col_gray2 },
@@ -55,21 +55,48 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+// These two are unused in my config but used in dwm.c and I can't be bothered to patch them out
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_accent, "-sf", col_gray4, NULL };
+
+static const char cols_window[] = "#151413, #151413, #151413";
+static const char cols_normal[] = "#151413, #a5a4a3, #151413, #252423, #e5e4e3";
+static const char cols_active[] = "#151413, #a5a4a3, #151413, #252423, #e5e4e3";
+static const char cols_urgent[] = "#151413, #a5a4a3, #151413, #252423, #e5e4e3";
+
+static const char *rofirun[] = {
+  "rofi",
+  "-show", "run",
+  "-modi", "run",
+  "-location", "1",
+  "-width", "100",
+  "-line-margin", "0",
+  "-line-padding", "1",
+  "-separator-style", "none",
+  "-font", "mono 10",
+  "-columns", "1",
+  "-bw", "0",
+  "-hide-scrollbar",
+  "-color-window", cols_window,
+  "-color-normal", cols_normal,
+  "-color-active", cols_active,
+  "-color-urgent", cols_urgent,
+  NULL
+};
+
 static const char *termcmd[]  = { "kitty", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = rofirun } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 //	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 //	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.025} },
+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.025} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
